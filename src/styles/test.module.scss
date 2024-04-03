@@ -1,0 +1,30 @@
+.container {
+    font-size: 14px;
+}
+.container .header {
+    font-size: 18px;
+}
+.container .shop-list {
+    list-style: none;
+    margin-left: -15px;
+}
+.container .shop-list li.item {
+    color: green;
+}
+.container .shop-list .item {
+    /* 
+      Q: Explain why does this color not works, and how to fix make it work on 1st list 
+      A: Because the "li.item" class has higher priority than the ".item". 
+         To make this work you need to apply ".shop-list:nth-child(1)" to
+         select the first class of shop-list with children selector, ensure that
+         you are changing the styles of first item list
+    */
+    color: blue;
+}
+/* Write styling make every other line give background color to next one */
+.container .shop-list li.item:nth-child(even) {
+    background-color: red;
+}
+.container .shop-list li.item:nth-child(odd) {
+    background-color: skyblue;
+}

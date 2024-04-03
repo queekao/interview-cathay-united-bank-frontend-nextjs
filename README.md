@@ -1,6 +1,7 @@
 # interview-cathay-united-bank
 
-This is an interview project
+This is an interview project, the answer is inside of the `/pages/test` directory
+and `/test/1` will be the first .pdf question then `/test/2` will be the second .pdf question
 
 ## Frontend Configuration
 
@@ -30,6 +31,7 @@ Below is the directory structure for the frontend part of the project:
 │   │   └── MainLayout/          # Main layout wrapper for the app
 │   ├── pages/                   # Page components and API routes
 │   │   ├── api/                 # Server-side API routes and database queries
+│   │   ├── test/                # contain the answer of the .pdf test
 │   ├── providers/               # Context providers
 │   ├── styles/                  # Global styles and SCSS modules
 │   │   └── globals.module.scss  # SCSS overrides for MUI components

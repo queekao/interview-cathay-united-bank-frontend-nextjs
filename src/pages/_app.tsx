@@ -10,16 +10,19 @@ import {
 } from '@mui/material'
 import { theme } from '@/themes'
 import MainLayout from '@/layouts/MainLayout'
-import { Header } from '@/components/Header'
+// import { Header } from '@/components/Header'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 // Dynamically imported pages
 
 export default function App({ pageProps }: AppProps): ReactElement {
   const router = useRouter()
-  const { pathname } = router
+  const { asPath } = router
+  const { id } = router.query
+
   const AnyComponent = dynamic(
-    () => (pathname === '/test' ? import('./testOne') : import('./index')),
+    () =>
+      asPath === `/test/${id}` ? import('./test/[id]') : import('./index'),
     {
       loading: () => (
         <Backdrop
@@ -38,7 +41,7 @@ export default function App({ pageProps }: AppProps): ReactElement {
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme()}>
           <MainLayout>
-            <Header />
+            {/* <Header /> */}
             <Suspense>
               <AnyComponent {...pageProps} />
             </Suspense>
