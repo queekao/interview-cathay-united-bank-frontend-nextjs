@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import styles from '@/styles/test.module.scss'
-
+// import Calendar from '@/components/CustomMuiElement/Calendar/index'
 /**
+  Q1.
   There is an array, each item has such format:
   {firstName: 'xxx', lastName: 'xxx', customerID: 'xxx', note: 'xxx',
   profession: ‘xxx’}
@@ -123,7 +124,7 @@ export default function TestPage(): ReactElement {
     3, 2, 6, 7, 5, 4, 4, 7, 8, 8, 0, 1, 2, 3, 1];
     Please write down a function to console log unique value from this array.
   **/
-  let items = [
+  const items = [
     1, 1, 1, 5, 2, 3, 4, 3, 3, 3, 3, 3, 3, 7, 8, 5, 4, 9, 0, 1, 3, 2, 6, 7, 5,
     4, 4, 7, 8, 8, 0, 1, 2, 3, 1
   ]
@@ -223,39 +224,44 @@ export default function TestPage(): ReactElement {
     **/
   return (
     <div>
-      <h1>Test 1.1</h1>
-      {sortUserName(mockUsers).map(user => (
-        <p key={user}>{user}</p>
-      ))}
-      <p>////////////////////////////////////</p>
-      <h1>Test 1.2</h1>
-      {sortByType(mockUsers).map(user => (
-        <p key={user.customerID}>{user.firstName}</p>
-      ))}
-      <p>////////////////////////////////////</p>
-      <h3>test 2</h3>
-      {/* I have written the answer in the styles directory, inside the test.module.scss file. */}
-      <div className={styles.container}>
-        <div className={styles.header}>5/8 外出確認表</div>
-        <div className={styles.content}>
-          <ol className={styles['shop-list']}>
-            <li className={styles.item}>麵包</li>
-            <li className={styles.item}>短袖衣服</li>
-            <li className={styles.item}>飲用水</li>
-            <li className={styles.item}>帳篷</li>
-          </ol>
-          <ul className={styles['shop-list']}>
-            <li className={styles.item}>暈車藥</li>
-            <li className={styles.item}>感冒藥</li>
-            <li className={styles.item}>丹木斯</li>
-            <li className={styles.item}>咳嗽糖漿</li>
-          </ul>
-        </div>
-        <div className={styles.footer}>以上僅共參考</div>
-      </div>
-      <p>////////////////////////////////////</p>
-      <h3>test 3</h3>
-      <p>Unique Value:{getUniqueNumber(items)}</p>
+      {id === '1' && (
+        <>
+          <h1>Test 1.1</h1>
+          {sortUserName(mockUsers).map(user => (
+            <p key={user}>{user}</p>
+          ))}
+          <p>////////////////////////////////////</p>
+          <h1>Test 1.2</h1>
+          {sortByType(mockUsers).map(user => (
+            <p key={user.customerID}>{user.firstName}</p>
+          ))}
+          <p>////////////////////////////////////</p>
+          <h3>test 2</h3>
+          {/* I have written the answer in the styles directory, inside the test.module.scss file. */}
+          <div className={styles.container}>
+            <div className={styles.header}>5/8 外出確認表</div>
+            <div className={styles.content}>
+              <ol className={styles['shop-list']}>
+                <li className={styles.item}>麵包</li>
+                <li className={styles.item}>短袖衣服</li>
+                <li className={styles.item}>飲用水</li>
+                <li className={styles.item}>帳篷</li>
+              </ol>
+              <ul className={styles['shop-list']}>
+                <li className={styles.item}>暈車藥</li>
+                <li className={styles.item}>感冒藥</li>
+                <li className={styles.item}>丹木斯</li>
+                <li className={styles.item}>咳嗽糖漿</li>
+              </ul>
+            </div>
+            <div className={styles.footer}>以上僅共參考</div>
+          </div>
+          <p>////////////////////////////////////</p>
+          <h3>test 3</h3>
+          <p>Unique Value:{getUniqueNumber(items)}</p>
+        </>
+      )}
+      {/* {id === '2' && <Calendar />} */}
     </div>
   )
 }

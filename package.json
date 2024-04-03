@@ -18,8 +18,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --component",
     "cypress:e2e": "cypress run --config video=false",
-    "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test": "jest"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -44,7 +43,6 @@
     "@types/node": "20.10.4",
     "@types/react": " 18.2.45",
     "@types/react-dom": "18.2.17",
-    "@types/testing-library__jest-dom": "5",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "cypress": "^13.7.1",
@@ -74,6 +72,8 @@
     "webpack": "^5.89.0"
   },
   "resolutions": {
-    "strip-ansi": "^6.0.0"
+    "wrap-ansi": "7.0.0",
+    "string-width": "4.1.0",
+    "strip-ansi": "^6.0.1"
   }
 }

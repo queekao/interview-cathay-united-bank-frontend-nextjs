@@ -10,6 +10,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   }
+  // https://nextjs.org/docs/architecture/nextjs-compiler#module-transpilation
+  // transpilePackages: ['@mui/x-date-pickers']
 }
 
 module.exports = nextConfig
