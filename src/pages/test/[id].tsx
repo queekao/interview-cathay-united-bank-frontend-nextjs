@@ -1,7 +1,9 @@
 import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import styles from '@/styles/test.module.scss'
-// import Calendar from '@/components/CustomMuiElement/Calendar/index'
+import { CalendarProvider } from '@/providers/CalendarProvider'
+import Calendar from '@/components/CustomMuiElement/Calendar'
+import dayjs from 'dayjs'
 /**
   Q1.
   There is an array, each item has such format:
@@ -152,8 +154,9 @@ export default function TestPage(): ReactElement {
     please make some examples.
     A: 
        1.Enum is using for defining the variable of value  
-         1.1 For the frontend, you can define a object of key contain multiple value
-           that you can only utilize this value for certain use cases
+         1.1 For the frontend, you can define a object of key contain value
+           that you can only utilize this value for certain use cases like 
+           a set of "named constants"
          1.2 For the database, you can define a gender key that contains 
            the value of "MALE" or "FEMALE", which means you can only implement
            this key with "MALE" or "FEMALE"
@@ -198,6 +201,7 @@ export default function TestPage(): ReactElement {
   **/
   /** 
   Q6. Please write the sample code to debounce handleOnChange 
+      // Answer 👇
       function debounce(func, wait) {
         let timeout;
 
@@ -261,7 +265,11 @@ export default function TestPage(): ReactElement {
           <p>Unique Value:{getUniqueNumber(items)}</p>
         </>
       )}
-      {/* {id === '2' && <Calendar />} */}
+      <CalendarProvider currentDay={dayjs()}>
+        {/* Task 1 */}
+        {id === '2' && <Calendar isMonthNavigator={false} />}
+        {/* Task 2 */}
+      </CalendarProvider>
     </div>
   )
 }
