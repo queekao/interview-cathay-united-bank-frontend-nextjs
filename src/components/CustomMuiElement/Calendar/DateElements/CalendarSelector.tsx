@@ -46,7 +46,6 @@ const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
     setCurrentDay({ currentDay: newCurrentDay })
   }
   const theme = useTheme()
-  console.log('re-render selector')
   return (
     <Box sx={CalendarSelectorSx(theme)}>
       <>

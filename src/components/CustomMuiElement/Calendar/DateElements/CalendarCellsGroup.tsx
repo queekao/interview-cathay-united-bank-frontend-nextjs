@@ -55,11 +55,22 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
   const [currentDay] = useCalendar(calendar => calendar['currentDay'])
   const rows = getCalendarRows(currentDay)
   const datesInRange = getDatesInRange(selectedPrevDate, selectedNextDate)
-  console.log('re-render')
   const selectedDateHandler = (date: Dayjs): void => {
-    if (!selectedPrevDate || date.isBefore(selectedPrevDate))
+    if (!selectedPrevDate) {
       setSelectedPrevDate({ selectedPrevDate: date })
-    else setSelectedNextDate({ selectedNextDate: date })
+    } else if (!selectedNextDate) {
+      setSelectedNextDate({ selectedNextDate: date })
+    } else {
+      // If both dates are set, determine which date the current date is closer to
+      const isCloserToPrev =
+        date.diff(selectedPrevDate, 'day') < selectedNextDate.diff(date, 'day')
+
+      if (isCloserToPrev) {
+        setSelectedPrevDate({ selectedPrevDate: date })
+      } else {
+        setSelectedNextDate({ selectedNextDate: date })
+      }
+    }
   }
 
   return (
