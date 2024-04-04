@@ -30,11 +30,23 @@ const CalendarSelectorSx = (theme: Theme): SxProps<Theme> => ({
   '& .date': {}
 })
 
-export const CalendarSelector: React.FC<ICalendarProps> = ({
-  isMonthNavigator
-}) => {
-  const { calendar, changeDateMonth } = useCalendar()
+const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
+  const [currentDay, setCurrentDay] = useCalendar(
+    calendar => calendar['currentDay']
+  )
+
+  const changeDateMonth = (isNextMonth: boolean): void => {
+    const newCurrentDay =
+      currentDay.month() === 0 && !isNextMonth
+        ? currentDay.set('year', currentDay.year() - 1).set('month', 11)
+        : currentDay.month() === 11 && isNextMonth
+        ? currentDay.set('year', currentDay.year() + 1).set('month', 0)
+        : currentDay.add(isNextMonth ? 1 : -1, 'month')
+
+    setCurrentDay({ currentDay: newCurrentDay })
+  }
   const theme = useTheme()
+  console.log('re-render selector')
   return (
     <Box sx={CalendarSelectorSx(theme)}>
       <>
@@ -45,7 +57,7 @@ export const CalendarSelector: React.FC<ICalendarProps> = ({
           <ChevronLeftIcon />
         </div>
 
-        <div className="date">{calendar.currentDay.format('YYYY年MM月')}</div>
+        <div className="date">{currentDay.format('YYYY年MM月')}</div>
 
         <div
           className={clsx('icon', 'icon__right')}
@@ -57,3 +69,4 @@ export const CalendarSelector: React.FC<ICalendarProps> = ({
     </Box>
   )
 }
+export default React.memo(CalendarSelector)

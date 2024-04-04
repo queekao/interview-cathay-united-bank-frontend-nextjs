@@ -25,6 +25,10 @@ Below is the directory structure for the frontend part of the project:
 │   ├── components/              # Reusable components
 │   │   └── CustomMuiElement/    # Customized MUI elements
 │   │       ├── ButtonSets/      # Collection of button components
+│   │       ├── Calendar/        # Collection of calendar components
+│   │       ├──── DateElements/  # Contain all the calendar elements
+│   │       ├──── method.ts/     # Utility functions and helpers
+│   │       ├──── index.tsx/     # Export entire calendar
 │   ├── configs/                 # Configuration files and constants
 │   ├── hooks/                   # Custom React hooks
 │   ├── layouts/                 # Layout components
@@ -36,7 +40,7 @@ Below is the directory structure for the frontend part of the project:
 │   ├── styles/                  # Global styles and SCSS modules
 │   │   └── globals.module.scss  # SCSS overrides for MUI components
 │   ├── themes/                  # Theme configuration for MUI
-│   └── utils/                   # Utility functions and helpers
+│   └── utils/                   # Global Utility functions and helpers
 ├── .dockerignore
 ├── .eslintignore
 ├── .eslintrc.json
@@ -154,6 +158,15 @@ yarn test
 ```bash
 yarn test:watch
 ```
+
+### Commit Rules
+
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **test**: A test code change in `cypress` or `__tests__` directory
+- **refactor**: A code change that neither fixes a bug nor adds refactor the code
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 
 ### Start and dev difference
 

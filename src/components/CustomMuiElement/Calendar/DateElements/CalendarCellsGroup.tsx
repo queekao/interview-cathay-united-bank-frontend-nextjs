@@ -1,9 +1,11 @@
 import React from 'react'
+import type { Dayjs } from 'dayjs'
 import { useCalendar } from '@/hooks'
 import clsx from 'clsx'
 import { SxProps } from '@mui/system'
 import { Box } from '@mui/material'
 import { useTheme, Theme } from '@mui/material/styles'
+import { getCalendarRows } from '../method'
 
 const CalendarCellsGroupSx = (theme: Theme): SxProps<Theme> => ({
   display: 'flex',
@@ -40,12 +42,24 @@ const CalendarCellsGroupSx = (theme: Theme): SxProps<Theme> => ({
     }
   }
 })
-export const CalendarCellsGroup: React.FC<ICalendarProps> = ({
+const CalendarCellsGroup: React.FC<ICalendarProps> = ({
   isForbiddenNonCurrentMonth
 }) => {
   const theme = useTheme()
-  const { calendar, getCalendarRows, selectedDateHandler } = useCalendar()
-  const rows = getCalendarRows()
+  const [selectedNextDate, setSelectedNextDate] = useCalendar(
+    calendar => calendar['selectedNextDate']
+  )
+  const [selectedPrevDate, setSelectedPrevDate] = useCalendar(
+    calendar => calendar['selectedPrevDate']
+  )
+  const [currentDay] = useCalendar(calendar => calendar['currentDay'])
+  const rows = getCalendarRows(currentDay)
+  console.log('re-render')
+  const selectedDateHandler = (date: Dayjs): void => {
+    if (!selectedPrevDate || date.isBefore(selectedPrevDate)) {
+      setSelectedPrevDate({ selectedPrevDate: date })
+    } else setSelectedNextDate({ selectedNextDate: date })
+  }
 
   return (
     <Box sx={CalendarCellsGroupSx(theme)}>
@@ -58,14 +72,11 @@ export const CalendarCellsGroup: React.FC<ICalendarProps> = ({
                   key={key}
                   className={clsx('cell__day', {
                     cell__day_selected:
-                      value.toString() ===
-                        calendar?.selectedNextDate?.toString() ||
+                      value.toString() === selectedNextDate?.toString() ||
                       false ||
-                      value.toString() ===
-                        calendar?.selectedPrevDate?.toString() ||
+                      value.toString() === selectedPrevDate?.toString() ||
                       false,
-                    cell__day_today:
-                      value.toString() === calendar.currentDay.toString(),
+                    cell__day_today: value.toString() === currentDay.toString(),
                     cell__day_hover: isCurMonth || !isForbiddenNonCurrentMonth,
                     cell__day_disabled:
                       isForbiddenNonCurrentMonth && !isCurMonth
@@ -88,3 +99,4 @@ export const CalendarCellsGroup: React.FC<ICalendarProps> = ({
     </Box>
   )
 }
+export default React.memo(CalendarCellsGroup)

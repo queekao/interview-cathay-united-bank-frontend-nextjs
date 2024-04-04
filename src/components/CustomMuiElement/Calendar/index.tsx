@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
 
 import { ReactElement } from 'react'
-import { CalendarSelector } from './DateElements/CalendarSelector'
-import { CalendarCellsGroup } from './DateElements/CalendarCellsGroup'
+import CalendarSelector from './DateElements/CalendarSelector'
+import CalendarCellsGroup from './DateElements/CalendarCellsGroup'
 import { Box } from '@mui/material'
 import { useTheme, Theme } from '@mui/material/styles'
 import { SxProps } from '@mui/system'
@@ -25,7 +25,7 @@ const CalendarSx = (theme: Theme): SxProps<Theme> => ({
   margin: '0 auto'
 })
 
-export default function Calendar({
+function Calendar({
   isMonthNavigator,
   isForbiddenNonCurrentMonth
 }: ICalendarProps): ReactElement {
@@ -39,3 +39,4 @@ export default function Calendar({
     </Box>
   )
 }
+export default Calendar
