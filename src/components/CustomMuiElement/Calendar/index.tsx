@@ -16,10 +16,6 @@ dayjs.locale('zh-cn') // use the locale globally
    this calendar more scalable without adding the complexity
    to the CalendarProvider
  */
-// interface ICalendarProps {
-//   isMonthNavigator: boolean
-//   isForbiddenNonCurrentMonth: boolean
-// }
 const CalendarSx = (theme: Theme): SxProps<Theme> => ({
   ...theme.flexCenter,
   flexDirection: 'column',

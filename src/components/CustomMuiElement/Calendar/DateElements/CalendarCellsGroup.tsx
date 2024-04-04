@@ -16,7 +16,7 @@ const CalendarCellsGroupSx = (theme: Theme): SxProps<Theme> => ({
       width: '5rem',
       height: '3.6rem',
       background: theme.palette.common?.white,
-      transition: 'background 0.2s, color 0.5s',
+      transition: 'background 0.2s, color 0.4s',
       cursor: 'pointer',
       '&_selected': {
         background: `${theme.palette.calendar?.active} !important`,
@@ -46,7 +46,7 @@ export const CalendarCellsGroup: React.FC<ICalendarProps> = ({
   const theme = useTheme()
   const { calendar, getCalendarRows, selectedDateHandler } = useCalendar()
   const rows = getCalendarRows()
-  console.log(rows)
+  console.log(calendar)
 
   return (
     <Box sx={CalendarCellsGroupSx(theme)}>
@@ -79,7 +79,7 @@ export const CalendarCellsGroup: React.FC<ICalendarProps> = ({
                       : () => {}
                   }
                 >
-                  {text}
+                  {`${text}日`}
                 </div>
               )
             })}
