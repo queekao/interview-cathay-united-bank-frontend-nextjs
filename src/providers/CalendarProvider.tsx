@@ -25,7 +25,7 @@ interface ICalendarCell {
   key: string
   text: string
   value: Dayjs
-  isThisMonth: boolean
+  isCurMonth: boolean
 }
 export interface ICalendarContextType {
   calendar: ICalendar
@@ -54,19 +54,16 @@ export const CalendarProvider: React.FC<
     setCalendar(prevCalendar => {
       if (
         !prevCalendar.selectedPrevDate ||
-        date.isAfter(prevCalendar.selectedPrevDate)
+        date.isBefore(prevCalendar.selectedPrevDate)
       ) {
-        // If there is no previous date or the selected date is after the previous date,
+        return {
+          ...prevCalendar,
+          selectedPrevDate: date
+        }
+      } else {
         return {
           ...prevCalendar,
           selectedNextDate: date
-        }
-      } else {
-        // If the selected date is before the previous date,
-        return {
-          ...prevCalendar,
-          selectedPrevDate: date,
-          selectedNextDate: undefined
         }
       }
     })
@@ -90,14 +87,14 @@ export const CalendarProvider: React.FC<
   function generateCell(
     date: Dayjs = calendar.currentDay,
     dayNumber: number,
-    isThisMonth?: boolean
+    isCurMonth?: boolean
   ): ICalendarCell {
     const key = date.clone().set('date', dayNumber).format('YYYY-MM-DD')
     return {
       key,
       text: String(dayNumber),
       value: date.clone().set('date', dayNumber),
-      isThisMonth: isThisMonth || false
+      isCurMonth: isCurMonth || false
     }
   }
   function getCalendarCells(): ICalendarCell[] {

@@ -46,14 +46,13 @@ export const CalendarCellsGroup: React.FC<ICalendarProps> = ({
   const theme = useTheme()
   const { calendar, getCalendarRows, selectedDateHandler } = useCalendar()
   const rows = getCalendarRows()
-  console.log(calendar)
 
   return (
     <Box sx={CalendarCellsGroupSx(theme)}>
       {rows.map((cells, rowIndex) => {
         return (
           <div key={rowIndex} className="cell">
-            {cells.map(({ text, value, key, isThisMonth }) => {
+            {cells.map(({ text, value, key, isCurMonth }) => {
               return (
                 <div
                   key={key}
@@ -67,14 +66,14 @@ export const CalendarCellsGroup: React.FC<ICalendarProps> = ({
                       false,
                     cell__day_today:
                       value.toString() === calendar.currentDay.toString(),
-                    cell__day_hover: isThisMonth || !isForbiddenNonCurrentMonth,
+                    cell__day_hover: isCurMonth || !isForbiddenNonCurrentMonth,
                     cell__day_disabled:
-                      isForbiddenNonCurrentMonth && !isThisMonth
+                      isForbiddenNonCurrentMonth && !isCurMonth
                   })}
                   onClick={
-                    isThisMonth
+                    isCurMonth
                       ? () => selectedDateHandler(value)
-                      : !isThisMonth && !isForbiddenNonCurrentMonth //If we are not forbidden the month days
+                      : !isCurMonth && !isForbiddenNonCurrentMonth //If we are not forbidden the month days
                       ? () => selectedDateHandler(value)
                       : () => {}
                   }
