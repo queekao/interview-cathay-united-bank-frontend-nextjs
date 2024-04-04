@@ -1,4 +1,4 @@
-import { enUS } from '@mui/material/locale'
+import { zhTW } from '@mui/material/locale'
 import { createTheme, ThemeOptions, Theme } from '@mui/material/styles'
 import { ThemeOption, Colors } from './themeOptions'
 // project imports
@@ -59,7 +59,7 @@ export const theme = (): Theme => {
     components: componentStyleOverrides()
   }
 
-  const themes = createTheme(themeOptions, enUS)
+  const themes = createTheme(themeOptions, zhTW)
 
   return themes
 }
