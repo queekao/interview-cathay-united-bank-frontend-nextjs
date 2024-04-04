@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import { SxProps } from '@mui/system'
 import { Box } from '@mui/material'
 import { useTheme, Theme } from '@mui/material/styles'
-import { getCalendarRows } from '../method'
+import { getCalendarRows, getDatesInRange } from '../method'
 
 const CalendarCellsGroupSx = (theme: Theme): SxProps<Theme> => ({
   display: 'flex',
@@ -54,11 +54,12 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
   )
   const [currentDay] = useCalendar(calendar => calendar['currentDay'])
   const rows = getCalendarRows(currentDay)
+  const datesInRange = getDatesInRange(selectedPrevDate, selectedNextDate)
   console.log('re-render')
   const selectedDateHandler = (date: Dayjs): void => {
-    if (!selectedPrevDate || date.isBefore(selectedPrevDate)) {
+    if (!selectedPrevDate || date.isBefore(selectedPrevDate))
       setSelectedPrevDate({ selectedPrevDate: date })
-    } else setSelectedNextDate({ selectedNextDate: date })
+    else setSelectedNextDate({ selectedNextDate: date })
   }
 
   return (
@@ -75,6 +76,8 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
                       value.toString() === selectedNextDate?.toString() ||
                       false ||
                       value.toString() === selectedPrevDate?.toString() ||
+                      false ||
+                      datesInRange.get(value.toString()) ||
                       false,
                     cell__day_today: value.toString() === currentDay.toString(),
                     cell__day_hover: isCurMonth || !isForbiddenNonCurrentMonth,
