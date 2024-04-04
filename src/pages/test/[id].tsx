@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import styles from '@/styles/test.module.scss'
 import { CalendarProvider } from '@/providers/CalendarProvider'
+// import Calendar from '@/components/CustomMuiElement/Calendar'
 import Calendar from '@/components/CustomMuiElement/Calendar'
 import dayjs from 'dayjs'
 /**
@@ -205,10 +206,10 @@ export default function TestPage(): ReactElement {
       function debounce(func, wait) {
         let timeout;
 
-        return function executedFunction(...args) {
+        return function executedFunction(...arguments) {
           const delay = () => {
             clearTimeout(timeout);
-            func(...args);
+            func(...arguments);
           };
 
           // reset timeout
@@ -267,7 +268,12 @@ export default function TestPage(): ReactElement {
       )}
       <CalendarProvider currentDay={dayjs()}>
         {/* Task 1 */}
-        {id === '2' && <Calendar isMonthNavigator={false} />}
+        {id === '2' && (
+          <Calendar
+            isMonthNavigator={false}
+            isForbiddenNonCurrentMonth={true}
+          />
+        )}
         {/* Task 2 */}
       </CalendarProvider>
     </div>

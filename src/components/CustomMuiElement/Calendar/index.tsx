@@ -10,14 +10,16 @@ import 'dayjs/locale/zh-cn'
 dayjs.locale('zh-cn') // use the locale globally
 /**
  * @component
- * @param {boolean} isMonthNavigator - whenther you want the month navigation functionality or not
+ * @param {TCalendarSelector} ICalendarProps.isMonthNavigator - whenther you want the month navigation functionality or not
+ * @param {TCalendarSelector} ICalendarProps.isForbiddenNonCurrentMonth - whenther you want the month navigation functionality or not
  * @description I put "isMonthNavigator" as props because I want make 
    this calendar more scalable without adding the complexity
    to the CalendarProvider
  */
-export interface ICalendarSelectorProps {
-  isMonthNavigator: boolean
-}
+// interface ICalendarProps {
+//   isMonthNavigator: boolean
+//   isForbiddenNonCurrentMonth: boolean
+// }
 const CalendarSx = (theme: Theme): SxProps<Theme> => ({
   ...theme.flexCenter,
   flexDirection: 'column',
@@ -28,13 +30,16 @@ const CalendarSx = (theme: Theme): SxProps<Theme> => ({
 })
 
 export default function Calendar({
-  isMonthNavigator
-}: ICalendarSelectorProps): ReactElement {
+  isMonthNavigator,
+  isForbiddenNonCurrentMonth
+}: ICalendarProps): ReactElement {
   const theme = useTheme()
   return (
     <Box sx={CalendarSx(theme)}>
       <CalendarSelector isMonthNavigator={isMonthNavigator} />
-      <CalendarCellsGroup />
+      <CalendarCellsGroup
+        isForbiddenNonCurrentMonth={isForbiddenNonCurrentMonth}
+      />
     </Box>
   )
 }

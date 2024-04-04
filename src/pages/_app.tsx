@@ -10,7 +10,6 @@ import {
 } from '@mui/material'
 import { theme } from '@/themes'
 import MainLayout from '@/layouts/MainLayout'
-// import { Header } from '@/components/Header'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 // Dynamically imported pages
@@ -41,7 +40,6 @@ export default function App({ pageProps }: AppProps): ReactElement {
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme()}>
           <MainLayout>
-            {/* <Header /> */}
             <Suspense>
               <AnyComponent {...pageProps} />
             </Suspense>

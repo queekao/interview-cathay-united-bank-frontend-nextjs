@@ -6,7 +6,6 @@ import { SxProps } from '@mui/system'
 import { useTheme, Theme } from '@mui/material/styles'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import { ICalendarSelectorProps } from '..'
 
 const CalendarSelectorSx = (theme: Theme): SxProps<Theme> => ({
   ...theme.flexCenter,
@@ -31,7 +30,7 @@ const CalendarSelectorSx = (theme: Theme): SxProps<Theme> => ({
   '& .date': {}
 })
 
-export const CalendarSelector: React.FC<ICalendarSelectorProps> = ({
+export const CalendarSelector: React.FC<ICalendarProps> = ({
   isMonthNavigator
 }) => {
   const { calendar, changeDateMonth } = useCalendar()

@@ -22,8 +22,10 @@ interface ICalendar {
   selectedNextDate?: Dayjs
 }
 interface ICalendarCell {
+  key: string
   text: string
   value: Dayjs
+  isThisMonth: boolean
 }
 export interface ICalendarContextType {
   calendar: ICalendar
@@ -85,33 +87,39 @@ export const CalendarProvider: React.FC<
 
     setCalendar({ ...calendar, currentDay: newCurrentDay })
   }
+  function generateCell(
+    date: Dayjs = calendar.currentDay,
+    dayNumber: number,
+    isThisMonth?: boolean
+  ): ICalendarCell {
+    const key = date.clone().set('date', dayNumber).format('YYYY-MM-DD')
+    return {
+      key,
+      text: String(dayNumber),
+      value: date.clone().set('date', dayNumber),
+      isThisMonth: isThisMonth || false
+    }
+  }
   function getCalendarCells(): ICalendarCell[] {
     const daysArray = new Array(calendar.currentDay.daysInMonth()).fill(1)
     const calendarCells: ICalendarCell[] = []
 
-    const prepareCell = (
-      date: Dayjs = calendar.currentDay,
-      dayNumber: number
-    ) => {
-      return {
-        text: String(dayNumber),
-        value: date.clone().set('date', dayNumber)
-      }
-    }
+    // need to mark current month to be this month
     daysArray.forEach((_, i) => {
-      calendarCells.push(prepareCell(undefined, i + 1))
+      calendarCells.push(generateCell(undefined, i + 1, true))
     })
 
     const cellsToAdd = 35 - daysArray.length
 
     const lastMonth = calendar.currentDay.subtract(1, 'month')
     for (let i = 0; i < Math.floor(cellsToAdd / 2); i++) {
-      calendarCells.unshift(prepareCell(lastMonth, lastMonth.daysInMonth() - i))
+      calendarCells.unshift(
+        generateCell(lastMonth, lastMonth.daysInMonth() - i)
+      )
     }
-
     const nextMonth = calendar.currentDay.add(1, 'month')
     for (let i = 0; i < Math.round(cellsToAdd / 2); i++) {
-      calendarCells.push(prepareCell(nextMonth, i + 1))
+      calendarCells.push(generateCell(nextMonth, i + 1))
     }
 
     return calendarCells
