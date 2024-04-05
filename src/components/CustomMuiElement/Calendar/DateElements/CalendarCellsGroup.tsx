@@ -46,17 +46,19 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
   isForbiddenNonCurrentMonth
 }) => {
   const theme = useTheme()
-  const [selectedNextDate, setSelectedNextDate] = useCalendar(
+  const [selectedNextDate, setSelectedNextDate, cloneCurDay] = useCalendar(
     calendar => calendar['selectedNextDate']
   )
   const [selectedPrevDate, setSelectedPrevDate] = useCalendar(
     calendar => calendar['selectedPrevDate']
   )
+  // console.log('re-render group')
+
   const [currentDay] = useCalendar(calendar => calendar['currentDay'])
   const rows = getCalendarRows(currentDay)
   const datesInRange = getDatesInRange(selectedPrevDate, selectedNextDate)
   const selectedDateHandler = (date: Dayjs): void => {
-    if (!selectedPrevDate) {
+    if (!selectedPrevDate || date.isBefore(selectedPrevDate)) {
       setSelectedPrevDate({ selectedPrevDate: date })
     } else if (!selectedNextDate) {
       setSelectedNextDate({ selectedNextDate: date })
@@ -90,7 +92,8 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
                       false ||
                       datesInRange.get(value.toString()) ||
                       false,
-                    cell__day_today: value.toString() === currentDay.toString(),
+                    cell__day_today:
+                      value.toString() === cloneCurDay.toString(),
                     cell__day_hover: isCurMonth || !isForbiddenNonCurrentMonth,
                     cell__day_disabled:
                       isForbiddenNonCurrentMonth && !isCurMonth

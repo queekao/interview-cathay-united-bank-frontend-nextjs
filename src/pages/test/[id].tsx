@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import styles from '@/styles/test.module.scss'
-import { CalendarProvider } from '@/providers/CalendarProvider'
+import { CalendarProvider } from '@/providers'
 // import Calendar from '@/components/CustomMuiElement/Calendar'
 import Calendar from '@/components/CustomMuiElement/Calendar'
 import dayjs from 'dayjs'
@@ -142,7 +142,9 @@ export default function TestPage(): ReactElement {
       }
     })
     const uniqueValues = [...aggregatingNums.entries()]
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .filter(([_, value]) => value === true)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .map(([key, _]) => key)
 
     console.log(uniqueValues)
@@ -267,14 +269,20 @@ export default function TestPage(): ReactElement {
         </>
       )}
       <CalendarProvider currentDay={dayjs()}>
-        {/* Task 1 */}
+        {/* react-question2 Task 1 */}
         {id === '2' && (
           <Calendar
             isMonthNavigator={false}
             isForbiddenNonCurrentMonth={true}
           />
         )}
-        {/* Task 2 */}
+        {/* react-question2 Task 2 */}
+        {id === '3' && (
+          <Calendar
+            isMonthNavigator={true}
+            isForbiddenNonCurrentMonth={false}
+          />
+        )}
       </CalendarProvider>
     </div>
   )

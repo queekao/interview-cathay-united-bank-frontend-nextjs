@@ -15,21 +15,23 @@ export interface ICalendar {
 
 interface ICalendarContextType {
   calendar: ICalendar
+  cloneCurDay: Dayjs
+  resetRangeDays: () => void
   get: () => ICalendar
   set: (value: Partial<ICalendar>) => void
   subscribe: (callback: () => void) => () => void
 }
 
-type CalendarProviderProps = {
-  currentDay: Dayjs
-}
+type CalendarProviderProps = Pick<ICalendar, 'currentDay'>
 
 export const CalendarContext = createContext<ICalendarContextType>(
   null as unknown as ICalendarContextType
 )
-// This is publish subscribe pattern
+// This is pub-sub pattern
 function useCalendarData(currentDay: Dayjs): {
   calendar: ICalendar
+  resetRangeDays: ICalendarContextType['resetRangeDays']
+  cloneCurDay: ICalendarContextType['cloneCurDay']
   get: ICalendarContextType['get']
   set: ICalendarContextType['set']
   subscribe: ICalendarContextType['subscribe']
@@ -41,7 +43,11 @@ function useCalendarData(currentDay: Dayjs): {
   })
 
   const get = useCallback(() => calendar.current, [])
-
+  const cloneCurDay = calendar.current.currentDay.clone()
+  const resetRangeDays = useCallback(() => {
+    calendar.current.selectedNextDate = undefined
+    calendar.current.selectedPrevDate = undefined
+  }, [])
   const subscribers = useRef(new Set<() => void>())
 
   const set = useCallback((value: Partial<ICalendar>) => {
@@ -56,6 +62,8 @@ function useCalendarData(currentDay: Dayjs): {
 
   return {
     calendar: calendar.current,
+    cloneCurDay,
+    resetRangeDays,
     get,
     set,
     subscribe
@@ -80,11 +88,14 @@ function useCalendarData(currentDay: Dayjs): {
 export const CalendarProvider: React.FC<
   CalendarProviderProps & ChildrenProps
 > = ({ currentDay, children }) => {
-  const { calendar, get, set, subscribe } = useCalendarData(currentDay)
+  const { calendar, cloneCurDay, resetRangeDays, get, set, subscribe } =
+    useCalendarData(currentDay)
   return (
     <CalendarContext.Provider
       value={{
         calendar,
+        cloneCurDay,
+        resetRangeDays,
         get,
         set,
         subscribe

@@ -1,7 +1,8 @@
 # interview-cathay-united-bank
 
 This is an interview project, the answer is inside of the `/pages/test` directory
-and `/test/1` will be the first .pdf question then `/test/2` will be the second .pdf question
+and `/test/1` will be the first `react-question.pdf` question then `/test/2` and
+`/test/3` will be the second `react-question2.pdf` question
 
 ## Frontend Configuration
 

@@ -12,8 +12,6 @@ import { theme } from '@/themes'
 import MainLayout from '@/layouts/MainLayout'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-// Dynamically imported pages
-
 export default function App({ pageProps }: AppProps): ReactElement {
   const router = useRouter()
   const { asPath } = router
@@ -39,11 +37,11 @@ export default function App({ pageProps }: AppProps): ReactElement {
     <>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme()}>
-          <MainLayout>
-            <Suspense>
+          <Suspense>
+            <MainLayout>
               <AnyComponent {...pageProps} />
-            </Suspense>
-          </MainLayout>
+            </MainLayout>
+          </Suspense>
         </ThemeProvider>
       </StyledEngineProvider>
     </>

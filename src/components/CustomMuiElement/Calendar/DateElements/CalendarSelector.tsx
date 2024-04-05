@@ -1,39 +1,23 @@
 import React from 'react'
 import { useCalendar } from '@/hooks'
-import clsx from 'clsx'
 import { Box } from '@mui/material'
 import { SxProps } from '@mui/system'
 import { useTheme, Theme } from '@mui/material/styles'
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import CalendarSelectorBtn from './CalendarSelectorBtn'
 
 const CalendarSelectorSx = (theme: Theme): SxProps<Theme> => ({
   ...theme.flexCenter,
   justifyContent: 'space-between',
-  padding: '4rem',
   width: '100%',
   height: '4.4rem',
-  marginBottom: '1.6rem',
-  '& .icon': {
-    background: theme.palette.common?.white,
-    ...theme.flexCenter,
-    width: '4.4rem',
-    height: '4.4rem',
-    transition: 'all 0.3s',
-    '&:hover': {
-      background: theme.palette?.calendar?.hover
-    },
-    cursor: 'pointer',
-    '&__left': {},
-    '&__right': {}
-  },
-  '& .date': {}
+  marginBottom: '1.6rem'
 })
 
 const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
-  const [currentDay, setCurrentDay] = useCalendar(
+  const [currentDay, setCurrentDay, , resetRangeDays] = useCalendar(
     calendar => calendar['currentDay']
   )
+  // console.log('re-render selector')
 
   const changeDateMonth = (isNextMonth: boolean): void => {
     const newCurrentDay =
@@ -44,26 +28,28 @@ const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
         : currentDay.add(isNextMonth ? 1 : -1, 'month')
 
     setCurrentDay({ currentDay: newCurrentDay })
+    resetRangeDays()
   }
   const theme = useTheme()
   return (
     <Box sx={CalendarSelectorSx(theme)}>
       <>
-        <div
-          className={clsx('icon', 'icon__left')}
-          onClick={isMonthNavigator ? () => changeDateMonth(false) : () => {}}
-        >
-          <ChevronLeftIcon />
-        </div>
+        <CalendarSelectorBtn
+          isRight={false}
+          changeDateMonth={
+            isMonthNavigator ? () => changeDateMonth(false) : () => {}
+          }
+          disabled={!isMonthNavigator || false}
+        />
 
-        <div className="date">{currentDay.format('YYYY年MM月')}</div>
-
-        <div
-          className={clsx('icon', 'icon__right')}
-          onClick={isMonthNavigator ? () => changeDateMonth(true) : () => {}}
-        >
-          <ChevronRightIcon />
-        </div>
+        <div>{currentDay.format('YYYY年MM月')}</div>
+        <CalendarSelectorBtn
+          isRight={true}
+          changeDateMonth={
+            isMonthNavigator ? () => changeDateMonth(true) : () => {}
+          }
+          disabled={!isMonthNavigator || false}
+        />
       </>
     </Box>
   )
