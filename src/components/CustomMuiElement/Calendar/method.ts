@@ -12,7 +12,7 @@ function generateCell(
   dayNumber: number,
   isCurMonth?: boolean
 ): ICalendarCell {
-  const key = date.clone().set('date', dayNumber).format('YYYY-MM-DD')
+  const key = date.clone().set('date', dayNumber).format('YYYY-MM-D')
   return {
     key,
     text: String(dayNumber),

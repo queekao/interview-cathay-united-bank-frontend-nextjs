@@ -84,6 +84,7 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
               return (
                 <div
                   key={key}
+                  data-date-key={key}
                   className={clsx('cell__day', {
                     cell__day_selected:
                       value.toString() === selectedNextDate?.toString() ||

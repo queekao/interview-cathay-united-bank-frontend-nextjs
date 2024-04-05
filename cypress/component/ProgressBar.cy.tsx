@@ -1,3 +1,4 @@
+// EXAMPLE
 // import ProgressBar from '../../src/ProgressBar'
 // import GlobalStyle from '../../src/GlobalStyle'
 

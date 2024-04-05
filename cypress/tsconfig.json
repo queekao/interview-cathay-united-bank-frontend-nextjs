@@ -1,9 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es5", "dom"],
-    "types": ["cypress", "node"],
-    "jsx": "preserve"
+    "esModuleInterop": true,
+    "module": "esnext",
+    "target": "es6",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "types": [
+      "cypress",
+      "node"
+    ],
+    "jsx": "preserve",
+    "moduleResolution": "node"
   },
-  "include": ["**/*.ts", "../cypress.d.ts"]
+  "include": [
+    "**/*.ts",
+    "../cypress.d.ts"
+  ]
 }
