@@ -5,6 +5,8 @@ import { CalendarProvider } from '@/providers'
 // import Calendar from '@/components/CustomMuiElement/Calendar'
 import Calendar from '@/components/CustomMuiElement/Calendar'
 import dayjs from 'dayjs'
+import Link from 'next/link'
+import { ArrowBackIos } from '@mui/icons-material'
 /**
   Q1.
   There is an array, each item has such format:
@@ -231,18 +233,19 @@ export default function TestPage(): ReactElement {
     **/
   return (
     <div>
+      <Link href="/" style={{ position: 'absolute', top: '5%', left: '15%' }}>
+        <ArrowBackIos />
+      </Link>
       {id === '1' && (
         <>
           <h1>Test 1.1</h1>
           {sortUserName(mockUsers).map(user => (
             <p key={user}>{user}</p>
           ))}
-          <p>////////////////////////////////////</p>
           <h1>Test 1.2</h1>
           {sortByType(mockUsers).map(user => (
             <p key={user.customerID}>{user.firstName}</p>
           ))}
-          <p>////////////////////////////////////</p>
           <h3>test 2</h3>
           {/* I have written the answer in the styles directory, inside the test.module.scss file. */}
           <div className={styles.container}>
@@ -263,7 +266,6 @@ export default function TestPage(): ReactElement {
             </div>
             <div className={styles.footer}>以上僅共參考</div>
           </div>
-          <p>////////////////////////////////////</p>
           <h3>test 3</h3>
           <p>Unique Value:{getUniqueNumber(items)}</p>
         </>
