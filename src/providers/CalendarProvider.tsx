@@ -22,7 +22,10 @@ interface ICalendarContextType {
   subscribe: (callback: () => void) => () => void
 }
 
-type CalendarProviderProps = Pick<ICalendar, 'currentDay'>
+type TCalendarProviderProps = Pick<ICalendar, 'currentDay'>
+// This two is provided for `useCalendar`
+export type TCloneCurDay = ICalendarContextType['cloneCurDay']
+export type TResetRangeDays = ICalendarContextType['resetRangeDays']
 
 export const CalendarContext = createContext<ICalendarContextType>(
   null as unknown as ICalendarContextType
@@ -86,7 +89,7 @@ function useCalendarData(currentDay: Dayjs): {
  */
 
 export const CalendarProvider: React.FC<
-  CalendarProviderProps & ChildrenProps
+  TCalendarProviderProps & ChildrenProps
 > = ({ currentDay, children }) => {
   const { calendar, cloneCurDay, resetRangeDays, get, set, subscribe } =
     useCalendarData(currentDay)

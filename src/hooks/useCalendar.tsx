@@ -1,6 +1,10 @@
 import { useContext, useSyncExternalStore } from 'react'
-import { ICalendar, CalendarContext } from '@/providers'
-import { Dayjs } from 'dayjs'
+import {
+  ICalendar,
+  CalendarContext,
+  TCloneCurDay,
+  TResetRangeDays
+} from '@/providers'
 /**
  * Context for providing and managing state and operations related to a calendar component.
  *
@@ -18,7 +22,12 @@ import { Dayjs } from 'dayjs'
 
 function useCalendar<SelectorOutput>(
   selector: (context: ICalendar) => SelectorOutput
-): [SelectorOutput, (value: Partial<ICalendar>) => void, Dayjs, () => void] {
+): [
+  SelectorOutput,
+  (value: Partial<ICalendar>) => void,
+  TCloneCurDay,
+  TResetRangeDays
+] {
   const context = useContext(CalendarContext)
   if (!context) {
     throw new Error('useCalendar must be used within a CalendarProvider')

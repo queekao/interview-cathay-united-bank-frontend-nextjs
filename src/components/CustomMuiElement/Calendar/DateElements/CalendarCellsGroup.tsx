@@ -5,14 +5,13 @@ import clsx from 'clsx'
 import { SxProps } from '@mui/system'
 import { Box } from '@mui/material'
 import { useTheme, Theme } from '@mui/material/styles'
-import { getCalendarRows, getDatesInRange } from '../method'
+import { getCalendarCellsAndKeys, getDatesInRange } from '../method'
 
 const CalendarCellsGroupSx = (theme: Theme): SxProps<Theme> => ({
-  display: 'flex',
-  flexDirection: 'column',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(7, 1fr)',
 
   '& .cell': {
-    ...theme.flexCenter,
     '&__day': {
       ...theme.flexCenter,
       width: '5rem',
@@ -55,7 +54,8 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
   // console.log('re-render group')
 
   const [currentDay] = useCalendar(calendar => calendar['currentDay'])
-  const rows = getCalendarRows(currentDay)
+  const { calendarCells, calendarKeys } = getCalendarCellsAndKeys(currentDay)
+
   const datesInRange = getDatesInRange(selectedPrevDate, selectedNextDate)
   const selectedDateHandler = (date: Dayjs): void => {
     if (!selectedPrevDate || date.isBefore(selectedPrevDate)) {
@@ -77,42 +77,38 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
 
   return (
     <Box sx={CalendarCellsGroupSx(theme)}>
-      {rows.map((cells, rowIndex) => {
-        return (
-          <div key={rowIndex} className="cell">
-            {cells.map(({ text, value, key, isCurMonth }) => {
-              return (
-                <div
-                  key={key}
-                  data-date-key={key}
-                  className={clsx('cell__day', {
-                    cell__day_selected:
-                      value.toString() === selectedNextDate?.toString() ||
-                      false ||
-                      value.toString() === selectedPrevDate?.toString() ||
-                      false ||
-                      datesInRange.get(value.toString()) ||
-                      false,
-                    cell__day_today:
-                      value.toString() === cloneCurDay.toString(),
-                    cell__day_hover: isCurMonth || !isForbiddenNonCurrentMonth,
-                    cell__day_disabled:
-                      isForbiddenNonCurrentMonth && !isCurMonth
-                  })}
-                  onClick={
-                    isCurMonth
-                      ? () => selectedDateHandler(value)
-                      : !isCurMonth && !isForbiddenNonCurrentMonth //If we are not forbidden the month days
-                      ? () => selectedDateHandler(value)
-                      : () => {}
-                  }
-                >
-                  {`${text}日`}
-                </div>
-              )
-            })}
-          </div>
-        )
+      {calendarKeys.map(key => {
+        const calendarCell = calendarCells.get(key)
+        if (calendarCell) {
+          const { text, value, isCurMonth } = calendarCell
+          return (
+            <div
+              key={key}
+              data-date-key={key}
+              className={clsx('cell__day', {
+                cell__day_selected:
+                  value.toString() === selectedNextDate?.toString() ||
+                  false ||
+                  value.toString() === selectedPrevDate?.toString() ||
+                  false ||
+                  datesInRange.get(value.toString()) ||
+                  false,
+                cell__day_today: value.toString() === cloneCurDay.toString(),
+                cell__day_hover: isCurMonth || !isForbiddenNonCurrentMonth,
+                cell__day_disabled: isForbiddenNonCurrentMonth && !isCurMonth
+              })}
+              onClick={
+                isCurMonth
+                  ? () => selectedDateHandler(value)
+                  : !isCurMonth && !isForbiddenNonCurrentMonth //If we are not forbidden the month days
+                  ? () => selectedDateHandler(value)
+                  : () => {}
+              }
+            >
+              {`${text}日`}
+            </div>
+          )
+        }
       })}
     </Box>
   )

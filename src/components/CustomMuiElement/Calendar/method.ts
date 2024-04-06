@@ -2,62 +2,68 @@
 import type { Dayjs } from 'dayjs'
 
 interface ICalendarCell {
-  key: string
   text: string
   value: Dayjs
   isCurMonth: boolean
 }
+type TCalendarMap = Map<string, ICalendarCell>
+type TCalendarKeys = Array<string>
+
 function generateCell(
   date: Dayjs,
   dayNumber: number,
   isCurMonth?: boolean
 ): ICalendarCell {
-  const key = date.clone().set('date', dayNumber).format('YYYY-MM-D')
   return {
-    key,
     text: String(dayNumber),
     value: date.clone().set('date', dayNumber),
     isCurMonth: isCurMonth || false
   }
 }
-function getCalendarCells(date: Dayjs): ICalendarCell[] {
-  const daysArray = new Array(date.daysInMonth()).fill(1)
-  const calendarCells: ICalendarCell[] = []
-
-  // need to mark the current month
-  daysArray.forEach((_, i) => {
-    calendarCells.push(generateCell(date, i + 1, true))
-  })
-
-  const cellsToAdd = 35 - daysArray.length
-
-  const lastMonth = date.subtract(1, 'month')
-  for (let i = 0; i < Math.floor(cellsToAdd / 2); i++) {
-    calendarCells.unshift(generateCell(lastMonth, lastMonth.daysInMonth() - i))
-  }
-  const nextMonth = date.add(1, 'month')
-  for (let i = 0; i < Math.round(cellsToAdd / 2); i++) {
-    calendarCells.push(generateCell(nextMonth, i + 1))
-  }
-
-  return calendarCells
-}
 /**
- * Generates an array of calendar rows for a given month.
+ * Generates an array of calendar cells and keys for a given month.
  * Each row represents one week, with an array of ICalendarCell objects representing days.
  *
  * @param {Dayjs} date - The date object representing the month to generate.
- * @return {Array<ICalendarCell[]>} An array of weeks, each week is an array of days.
+ * @return {{ TCalendarMap, TCalendarKeys }} A map contain all date information and a group of date keys for reference
  */
-export function getCalendarRows(date: Dayjs): Array<ICalendarCell[]> {
-  const cells = getCalendarCells(date)
-  const rows: Array<ICalendarCell[]> = []
-  for (let i = 0; i < cells.length; i += 7) {
-    rows.push(cells.slice(i, i + 7))
+export function getCalendarCellsAndKeys(date: Dayjs): {
+  calendarCells: TCalendarMap
+  calendarKeys: TCalendarKeys
+} {
+  const daysArray = new Array(date.daysInMonth()).fill(1)
+  // Utilize Key-vale pair instead of nested array
+  const calendarCells: TCalendarMap = new Map()
+  const calendarKeys: TCalendarKeys = []
+
+  const cellsToAdd = 35 - daysArray.length
+  const lastMonth = date.subtract(1, 'month')
+  const daysInLastMonth = lastMonth.daysInMonth()
+  // Calculate the start day for iteration
+  const startDay = daysInLastMonth - Math.floor(cellsToAdd / 2) + 1
+
+  for (let i = startDay; i <= daysInLastMonth; i++) {
+    const key = lastMonth.set('date', i).format('YYYY-MM-D')
+    calendarCells.set(key, generateCell(lastMonth, i))
+    calendarKeys.push(lastMonth.set('date', i).format('YYYY-MM-D'))
+  }
+  // need to mark the current month `isCurMonth = true`
+  daysArray.forEach((_, i) => {
+    const key = date.set('date', i + 1).format('YYYY-MM-D')
+    calendarCells.set(key, generateCell(date, i + 1, true))
+    calendarKeys.push(date.set('date', i + 1).format('YYYY-MM-D'))
+  })
+
+  const nextMonth = date.add(1, 'month')
+  for (let i = 0; i < Math.round(cellsToAdd / 2); i++) {
+    const key = nextMonth.set('date', i + 1).format('YYYY-MM-D')
+    calendarCells.set(key, generateCell(nextMonth, i + 1))
+    calendarKeys.push(nextMonth.set('date', i + 1).format('YYYY-MM-D'))
   }
 
-  return rows
+  return { calendarCells, calendarKeys }
 }
+
 /**
  * Generates a map of date strings representing the range of dates between
  * the provided previous and next dates, inclusive.
