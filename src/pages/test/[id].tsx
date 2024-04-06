@@ -25,14 +25,14 @@ type Profession =
   | 'engineer'
   | 'systemAnalytics'
 
-interface User {
+export interface User {
   firstName: string
   lastName?: string
   customerID: number
   note?: string
   profession: Profession
 }
-const mockUsers: User[] = [
+export const mockUsers: User[] = [
   {
     firstName: 'John',
     lastName: 'Doe',
@@ -100,8 +100,7 @@ export default function TestPage(): ReactElement {
   const DynamicCalendar = dynamic(
     () => import('@/components/CustomElement/Calendar').then(mod => mod),
     {
-      loading: () => <LoadingSpinner />,
-      suspense: true
+      loading: () => <LoadingSpinner />
     }
   )
 
@@ -113,7 +112,7 @@ export default function TestPage(): ReactElement {
     return users
       .sort((a, b) => a.customerID - b.customerID)
       .map(user => {
-        return `${user.firstName} ${user?.lastName || ''} ${user?.customerID}`
+        return `${user.firstName} ${user?.lastName || ''} ${user.customerID}`
       })
   }
   /**
@@ -257,7 +256,7 @@ export default function TestPage(): ReactElement {
           ))}
           <h3>test 2</h3>
           {/* I have written the answer in the styles directory, inside the test.module.scss file. */}
-          <div className={styles.container}>
+          <div className={styles.container} data-testid="container">
             <div className={styles.header}>5/8 外出確認表</div>
             <div className={styles.content}>
               <ol className={styles['shop-list']}>

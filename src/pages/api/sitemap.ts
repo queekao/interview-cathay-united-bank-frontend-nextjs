@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import { Readable } from 'stream'
 
@@ -11,11 +10,11 @@ interface Link {
 
 export default async (req: any, res: any): Promise<void> => {
   // An array with your links
-  const router = useRouter()
-  const { id } = router.query
   const links: Link[] = [
     { url: '/', changefreq: 'daily', priority: 0.5 },
-    { url: `/test/${id}`, changefreq: 'daily', priority: 0.5 }
+    { url: '/test/1', changefreq: 'daily', priority: 0.5 },
+    { url: '/test/2', changefreq: 'daily', priority: 0.5 },
+    { url: '/test/3', changefreq: 'daily', priority: 0.5 }
   ]
 
   // Create a stream to write to with your hostname
