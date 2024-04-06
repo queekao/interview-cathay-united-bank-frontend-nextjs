@@ -18,7 +18,8 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --component",
     "cypress:e2e": "cypress run --config video=false",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -29,7 +30,6 @@
     "axios": "^1.6.2",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
-    "lodash": "^4.17.21",
     "next": "^14.1.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -39,12 +39,10 @@
     "@next/eslint-plugin-next": "^14.0.4",
     "@testing-library/jest-dom": "5.16.0",
     "@testing-library/react": "^14.2.2",
-    "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
-    "@types/lodash": "^4.14.202",
     "@types/node": "20.10.4",
     "@types/react": " 18.2.45",
-    "@types/react-dom": "18.2.17",
+    "@types/react-dom": "^18.2.24",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "cypress": "^13.7.1",

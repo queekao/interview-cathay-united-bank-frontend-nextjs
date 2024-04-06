@@ -241,7 +241,11 @@ export default function TestPage(): ReactElement {
     **/
   return (
     <div>
-      <Link href="/" style={{ position: 'absolute', top: '5%', left: '15%' }}>
+      <Link
+        href="/"
+        style={{ position: 'absolute', top: '5%', left: '15%' }}
+        data-testid="back to home page icon"
+      >
         <ArrowBackIos />
       </Link>
       {id === '1' && (
