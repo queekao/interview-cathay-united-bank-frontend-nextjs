@@ -24,8 +24,7 @@ Below is the directory structure for the frontend part of the project:
 │   ├── assets/                  # Static assets
 │   │   ├── icons/               # SVG icons
 │   ├── components/              # Reusable components
-│   │   └── CustomMuiElement/    # Customized MUI elements
-│   │       ├── ButtonSets/      # Collection of button components
+│   │   └── CustomElement/       # Customized elements that have multiple files
 │   │       ├── Calendar/        # Collection of calendar components
 │   │       ├──── DateElements/  # Contain all the calendar elements
 │   │       ├──── method.ts/     # Utility functions and helpers
