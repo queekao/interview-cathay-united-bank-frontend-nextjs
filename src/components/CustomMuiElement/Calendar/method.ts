@@ -1,11 +1,6 @@
 // Common function for this directory
 import type { Dayjs } from 'dayjs'
 
-interface ICalendarCell {
-  text: string
-  value: Dayjs
-  isCurMonth: boolean
-}
 type TCalendarMap = Map<string, ICalendarCell>
 type TCalendarKeys = Array<string>
 

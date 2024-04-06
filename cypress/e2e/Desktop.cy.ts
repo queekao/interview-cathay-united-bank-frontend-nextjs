@@ -30,11 +30,11 @@ for (let i = 0; i < Math.round(cellsToAdd / 2); i++) {
 
 describe('E2E Desktop version test', () => {
   beforeEach(() => {
+    cy.viewport(1440, 720) // Sets the dimensions to a desktop view
     cy.visit('/test/1')
     cy.get('svg[data-testid="ArrowBackIosIcon"]').as('backButton') // define variable
   })
   it('visit the home page', () => {
-    cy.viewport(1440, 720) // Sets the dimensions to a desktop view
     cy.visit('/')
   })
   it('Test 1 react-question.pdf', () => {

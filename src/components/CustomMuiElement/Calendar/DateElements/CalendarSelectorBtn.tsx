@@ -30,7 +30,7 @@ const CalendarSelectorBtn: React.FC<CalendarSelectorBtnProp> = ({
   changeDateMonth,
   disabled
 }) => {
-  // console.log('re-render selector btn')
+  console.log('re-render selector btn')
   const theme = useTheme()
   return (
     <Button

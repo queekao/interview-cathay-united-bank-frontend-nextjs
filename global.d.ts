@@ -9,4 +9,9 @@ declare global {
     isMonthNavigator?: boolean
     isForbiddenNonCurrentMonth?: boolean
   }
+  interface ICalendarCell {
+    text: string
+    value: Dayjs
+    isCurMonth: boolean
+  }
 }
