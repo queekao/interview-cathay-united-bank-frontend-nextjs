@@ -2,11 +2,12 @@ import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import styles from '@/styles/test.module.scss'
 import { CalendarProvider } from '@/providers'
-// import Calendar from '@/components/CustomMuiElement/Calendar'
-import Calendar from '@/components/CustomElement/Calendar'
 import dayjs from 'dayjs'
 import Link from 'next/link'
 import { ArrowBackIos } from '@mui/icons-material'
+import dynamic from 'next/dynamic'
+import LoadingSpinner from '@/components/LoadingSpinner'
+
 /**
   Q1.
   There is an array, each item has such format:
@@ -96,6 +97,14 @@ const mockUsers: User[] = [
 export default function TestPage(): ReactElement {
   const router = useRouter()
   const { id } = router.query
+  const DynamicCalendar = dynamic(
+    () => import('@/components/CustomElement/Calendar').then(mod => mod),
+    {
+      loading: () => <LoadingSpinner />,
+      suspense: true
+    }
+  )
+
   /**
     Q1.1 Please follow the principle (‘firstName’ + ‘lastName’ + ‘customerID’)
     to sort this array and print it out.
@@ -273,14 +282,14 @@ export default function TestPage(): ReactElement {
       <CalendarProvider currentDay={dayjs()}>
         {/* react-question2 Task 1 */}
         {id === '2' && (
-          <Calendar
+          <DynamicCalendar
             isMonthNavigator={false}
             isForbiddenNonCurrentMonth={true}
           />
         )}
         {/* react-question2 Task 2 */}
         {id === '3' && (
-          <Calendar
+          <DynamicCalendar
             isMonthNavigator={true}
             isForbiddenNonCurrentMonth={false}
           />
