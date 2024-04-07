@@ -8,11 +8,14 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@next/next/recommended"
+    "plugin:@next/next/recommended",
+    "prettier"
+    // "plugin:prettier/recommended"
   ],
   "plugins": [
     "@typescript-eslint",
     "react-hooks"
+    // "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -59,5 +62,9 @@
       "error",
       "never"
     ]
+    // "prettier/prettier": [
+    //   "warn",
+    //   {}
+    // ]
   }
 }

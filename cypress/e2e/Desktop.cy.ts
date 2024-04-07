@@ -17,6 +17,7 @@ daysArray.forEach((_, i) => {
 })
 calendarAllKeys.push(...calendarKeys)
 for (let i = 0; i < Math.floor(cellsToAdd / 2); i++) {
+  // ❌ Nested "unshift" inside of a loop is considered bad practice because it leads to Time Complexity O(n^2). Therefore, do not use it in production
   calendarDisabledKeys.unshift(
     lastMonth.set('date', lastMonth.daysInMonth() - i).format('YYYY-MM-D')
   )

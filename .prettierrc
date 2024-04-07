@@ -4,6 +4,6 @@
   "semi": false,
   "tabWidth": 2,
   "bracketSpacing": true,
-  "endOfLine": "lf",
+  "endOfLine": "auto",
   "trailingComma": "none"
 }
