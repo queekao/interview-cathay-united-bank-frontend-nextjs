@@ -58,8 +58,8 @@ const CalendarCell: React.FC<CalendarCellProp> = ({
         isCurMonth
           ? () => selectedDateHandler(value)
           : !isCurMonth && !isForbiddenNonCurrentMonth //If we are not forbidden the month days
-          ? () => selectedDateHandler(value)
-          : () => {}
+            ? () => selectedDateHandler(value)
+            : () => {}
       }
     >
       {`${text}日`}

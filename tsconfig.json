@@ -38,6 +38,10 @@
     "src/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    // separate cypress from jest
+    "cypress",
+    "cypress.d.ts",
+    "cypress.config.ts",
   ]
 }

@@ -24,8 +24,8 @@ const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
       currentDay.month() === 0 && !isNextMonth
         ? currentDay.set('year', currentDay.year() - 1).set('month', 11)
         : currentDay.month() === 11 && isNextMonth
-        ? currentDay.set('year', currentDay.year() + 1).set('month', 0)
-        : currentDay.add(isNextMonth ? 1 : -1, 'month')
+          ? currentDay.set('year', currentDay.year() + 1).set('month', 0)
+          : currentDay.add(isNextMonth ? 1 : -1, 'month')
 
     setCurrentDay({ currentDay: newCurrentDay })
     resetRangeDays()
