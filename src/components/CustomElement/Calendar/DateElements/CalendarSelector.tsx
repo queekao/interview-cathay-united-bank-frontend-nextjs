@@ -32,7 +32,10 @@ const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
   }
   const theme = useTheme()
   return (
-    <Box sx={CalendarSelectorSx(theme)}>
+    <Box
+      sx={CalendarSelectorSx(theme)}
+      data-testid={isMonthNavigator ? 'navigator' : 'no-navigator'}
+    >
       <>
         <CalendarSelectorBtn
           isRight={false}

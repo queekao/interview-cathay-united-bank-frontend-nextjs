@@ -50,7 +50,14 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
   const { calendarCells, calendarKeys } = getCalendarCellsAndKeys(currentDay)
 
   return (
-    <Box sx={CalendarCellsGroupSx(theme)}>
+    <Box
+      sx={CalendarCellsGroupSx(theme)}
+      data-testid={
+        isForbiddenNonCurrentMonth
+          ? 'forbidden-current-month'
+          : 'no-forbidden-current-month'
+      }
+    >
       {calendarKeys.map(key => {
         const calendarCell = calendarCells.get(key)
         if (calendarCell) {

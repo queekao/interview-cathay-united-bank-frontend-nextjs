@@ -244,7 +244,7 @@ export default function TestPage(): ReactElement {
       <Link
         href="/"
         style={{ position: 'absolute', top: '5%', left: '15%' }}
-        data-testid="back to home page icon"
+        data-testid="back-home-page-icon"
       >
         <ArrowBackIos />
       </Link>

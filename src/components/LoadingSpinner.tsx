@@ -5,8 +5,9 @@ const LoadingSpinner = (): ReactElement => {
     <Backdrop
       sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
       open={true}
+      data-testid="backdrop"
     >
-      <CircularProgress color="inherit" />
+      <CircularProgress color="inherit" data-testid="progressbar" />
     </Backdrop>
   )
 }
