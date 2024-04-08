@@ -167,9 +167,10 @@ export default function TestPage(): ReactElement {
     please make some examples.
     A: 
        1.Enum is using for defining the variable of value  
-         1.1 For the frontend, you can define a object of key contain value
-           that you can only utilize this value for certain use cases like 
-           a set of "named constants"
+         1.1 For the frontend, Enums are used to define a set of named constants, 
+          useful when a variable should only represent specific, predefined values. 
+          I usually define enum as objects with key-value pairs in a config directory,
+          ensuring that only these fixed values are used for certain use cases.
          1.2 For the database, you can define a gender key that contains 
            the value of "MALE" or "FEMALE", which means you can only implement
            this key with "MALE" or "FEMALE"
