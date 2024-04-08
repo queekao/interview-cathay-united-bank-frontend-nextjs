@@ -27,7 +27,7 @@ describe('Test Page ', () => {
     await act(async () => {
       render(<TestPage />)
     })
-    expect(screen.getByTestId('back to home page icon')).toBeInTheDocument()
+    expect(screen.getByTestId('back-home-page-icon')).toBeInTheDocument()
     expect(screen.getByText('Test 1.1')).toBeInTheDocument()
     mockUsers.forEach((user: User) => {
       expect(
@@ -65,7 +65,7 @@ describe('Test Page ', () => {
     await act(async () => {
       render(<TestPage />)
     })
-    expect(screen.getByTestId('back to home page icon')).toBeInTheDocument()
+    expect(screen.getByTestId('back-home-page-icon')).toBeInTheDocument()
     expect(screen.getByText(currentYearAndMonth)).toBeInTheDocument()
   })
   it('test in /test/3 route', async () => {
@@ -76,7 +76,7 @@ describe('Test Page ', () => {
     await act(async () => {
       render(<TestPage />)
     })
-    expect(screen.getByTestId('back to home page icon')).toBeInTheDocument()
+    expect(screen.getByTestId('back-home-page-icon')).toBeInTheDocument()
     expect(screen.getByText(currentYearAndMonth)).toBeInTheDocument()
   })
 })
