@@ -9,12 +9,14 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@next/next/recommended",
-    "plugin:jest-dom/recommended"
+    "plugin:jest-dom/recommended",
+    "prettier"
   ],
   "plugins": [
     "@typescript-eslint",
     "react-hooks",
-    "jest-dom"
+    "jest-dom",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -60,10 +62,7 @@
     "semi": [
       "error",
       "never"
-    ]
-    // "prettier/prettier": [
-    //   "warn",
-    //   {}
-    // ]
+    ],
+    "prettier/prettier": "error"
   }
 }

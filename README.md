@@ -63,8 +63,7 @@ Below is the directory structure for the frontend part of the project:
 ├── server.ts                    # This is custom node web server setup
 ├── tsconfig-server.json         # This is custom node web ts config
 ├── tsconfig.json
-├── vercel.json                  # Configuration for Deploying to vercel
-└──
+└── vercel.json                  # Configuration for Deploying to vercel
 ```
 
 ### Install dependencies
