@@ -194,6 +194,10 @@ export default function TestPage(): ReactElement {
         this.setState({ count: this.state.count + 1 });
         this.setState({ count: this.state.count + 1 });
         this.setState({ count: this.state.count + 1 });
+        // Fix code
+        this.setState((prevState) => ({count: prevState.count + 1}));
+        this.setState((prevState) => ({count: prevState.count + 1}));
+        this.setState((prevState) => ({count: prevState.count + 1}));
       }
       render() {
         return (
@@ -210,8 +214,8 @@ export default function TestPage(): ReactElement {
         document.getElementById('root')
       );
     ////
-    A: You shouldn't call "this.setState" three time in the "handleAddCount" 
-       it will only evaluate once which means plus 1 whenever you click the button
+    A: You shouldn add a callback function inside of the setState to find the
+       prevState and add count on it
   **/
   /** 
   Q6. Please write the sample code to debounce handleOnChange 
