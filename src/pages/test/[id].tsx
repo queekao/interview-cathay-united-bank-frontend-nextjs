@@ -174,8 +174,8 @@ export default function TestPage(): ReactElement {
          1.2 For the database, you can define a gender key that contains 
            the value of "MALE" or "FEMALE", which means you can only implement
            this key with "MALE" or "FEMALE"
-       2.Interface is using for defining the class of types in typescript
-         2.1 It is often using as a object of multiple type that you can extend it
+       2.Interface is a structure that define the shape of an object in typescript
+         2.1 It is often using as an object of multiple type that you can extend it
            with other interface, Or 
              2.1.1 you can "Partial" select the type
              2.1.2 you can "Omit" the type you don't want to use
