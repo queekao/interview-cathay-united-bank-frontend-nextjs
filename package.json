@@ -79,6 +79,8 @@
     "strip-ansi": "^6.0.1",
     "glob-parent": "^5.1.2",
     "trim-newlines": "^3.0.1",
-    "trim": "^0.0.3"
+    "postcss": "^8.4.31",
+    "trim": "^0.0.3",
+    "yargs-parser": "^13.1.2"
   }
 }
