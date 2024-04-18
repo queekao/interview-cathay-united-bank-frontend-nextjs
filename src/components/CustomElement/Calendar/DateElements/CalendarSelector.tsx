@@ -14,7 +14,7 @@ const CalendarSelectorSx = (theme: Theme): SxProps<Theme> => ({
 })
 
 const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
-  const [currentDay, setCurrentDay, , resetRangeDays] = useCalendar(
+  const [currentDay, setCurrentDay] = useCalendar(
     calendar => calendar['currentDay']
   )
   // console.log('re-render selector')
@@ -28,7 +28,7 @@ const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
           : currentDay.add(isNextMonth ? 1 : -1, 'month')
 
     setCurrentDay({ currentDay: newCurrentDay })
-    resetRangeDays()
+    // resetRangeDays()
   }
   const theme = useTheme()
   return (

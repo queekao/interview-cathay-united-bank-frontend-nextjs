@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { ArrowBackIos } from '@mui/icons-material'
 import dynamic from 'next/dynamic'
 import LoadingSpinner from '@/components/LoadingSpinner'
-
 /**
   Q1.
   There is an array, each item has such format:

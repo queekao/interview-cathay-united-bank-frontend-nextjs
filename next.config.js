@@ -9,6 +9,15 @@ const nextConfig = {
   output: 'standalone',
   typescript: {
     ignoreBuildErrors: true
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.module.rules.push({
+        test: /\.test\.(tsx|ts)$/, // explicitly ignore the test file during building
+        loader: 'ignore-loader'
+      })
+    }
+    return config
   }
   // https://nextjs.org/docs/architecture/nextjs-compiler#module-transpilation
   // transpilePackages: ['@mui/x-date-pickers']
