@@ -82,7 +82,7 @@ export function getDatesInRange(
       currentDate.isSame(endDate, 'day')
     ) {
       datesInRange.set(currentDate.toString(), currentDate.toString()) // push the comparing value
-      currentDate = currentDate.add(1, 'day')
+      currentDate = currentDate.add(1, 'day') // add until reach the end of the loop
     }
   }
   return datesInRange
