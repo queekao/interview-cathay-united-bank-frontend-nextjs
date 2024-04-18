@@ -76,6 +76,9 @@
   "resolutions": {
     "wrap-ansi": "7.0.0",
     "string-width": "4.1.0",
-    "strip-ansi": "^6.0.1"
+    "strip-ansi": "^6.0.1",
+    "glob-parent": "^5.1.2",
+    "trim-newlines": "^3.0.1",
+    "trim": "^0.0.3"
   }
 }
