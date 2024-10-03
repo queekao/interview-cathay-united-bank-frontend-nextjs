@@ -35,11 +35,13 @@ const CalendarSelectorBtn: React.FC<CalendarSelectorBtnProp> = ({
   return (
     <Button
       sx={CalendarSelectorBtnSx(theme)}
-      onClick={changeDateMonth}
+      onClick={() => {
+        changeDateMonth()
+      }}
       disabled={disabled}
     >
       {isRight ? <ChevronRightIcon /> : <ChevronLeftIcon />}
     </Button>
   )
 }
-export default React.memo(CalendarSelectorBtn)
+export default CalendarSelectorBtn

@@ -17,7 +17,7 @@ const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
   const [currentDay, setCurrentDay] = useCalendar(
     calendar => calendar['currentDay']
   )
-  // console.log('re-render selector')
+  console.log('re-render selector')
 
   const changeDateMonth = (isNextMonth: boolean): void => {
     const newCurrentDay =
@@ -57,4 +57,4 @@ const CalendarSelector: React.FC<ICalendarProps> = ({ isMonthNavigator }) => {
     </Box>
   )
 }
-export default React.memo(CalendarSelector)
+export default CalendarSelector

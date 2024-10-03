@@ -66,4 +66,4 @@ const CalendarCell: React.FC<CalendarCellProp> = ({
     </div>
   )
 }
-export default React.memo(CalendarCell)
+export default CalendarCell

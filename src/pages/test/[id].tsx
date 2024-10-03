@@ -96,13 +96,23 @@ export const mockUsers: User[] = [
 export default function TestPage(): ReactElement {
   const router = useRouter()
   const { id } = router.query
+  // const timer = useRef<any>()
   const DynamicCalendar = dynamic(
     () => import('@/components/CustomElement/Calendar').then(mod => mod),
     {
       loading: () => <LoadingSpinner />
     }
   )
-
+  // let num = 1
+  // useEffect(() => {
+  //   for (let i = 1; i <= 5; i++) {
+  //     timer.current = setTimeout(() => console.log(num++), i * 1000)
+  //   }
+  //   return () => {
+  //     console.log('clear')
+  //     if (timer) return clearTimeout(timer.current)
+  //   }
+  // }, [num])
   /**
     Q1.1 Please follow the principle (‘firstName’ + ‘lastName’ + ‘customerID’)
     to sort this array and print it out.

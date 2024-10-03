@@ -74,4 +74,4 @@ const CalendarCellsGroup: React.FC<ICalendarProps> = ({
     </Box>
   )
 }
-export default React.memo(CalendarCellsGroup)
+export default CalendarCellsGroup
