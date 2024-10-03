@@ -1,8 +1,6 @@
-# interview-cathay-united-bank
+# interview-cathay-united-bank-frontend-nextjs
 
-This is an interview project, the answer is inside of the `/pages/test` directory
-and `/test/1` will be the first `react-question.pdf` question then `/test/2` and
-`/test/3` will be the second `react-question2.pdf` question
+> ⚠️ **Note**: This project is now a demo template of nextjs with cypress and jest.
 
 ## Frontend Configuration
 
